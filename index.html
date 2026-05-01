@@ -1,340 +1,526 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Great Decoupling – Abraham Tonz</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@200;300;400&display=swap" rel="stylesheet" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Great Decoupling, Vol. II — Abraham Tonz</title>
+<meta name="description" content="A flagship essay on the future of intelligence, labor, and the human project — by Abraham Tonz." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f1e8;
+    --bg-soft: #ebe5d4;
+    --ink: #1a1410;
+    --ink-soft: #4a3f33;
+    --rule: #2a1f15;
+    --accent: #7a2f1d;
+    --accent-soft: #a64a32;
+    --muted: #6b5d4d;
+    --serif-display: "Cormorant Garamond", "EB Garamond", Georgia, serif;
+    --serif-body: "EB Garamond", Georgia, "Times New Roman", serif;
+    --sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  }
 
-  <style>
-    :root {
-      --bg: #0c0b09;
-      --paper: #f5f0e8;
-      --ink: #1a1714;
-      --gold: #c9a84c;
-      --gold-dim: #7a6230;
-      --rust: #8b3a2a;
-      --cream: #ede8da;
-      --muted: #6b6456;
-    }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
 
-    html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--serif-body);
+    font-size: 19px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
 
-    body {
-      background-color: var(--bg);
-      color: var(--paper);
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-weight: 300;
-      overflow-x: hidden;
-    }
+  /* Subtle paper grain */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.35;
+    z-index: 1;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.1 0 0 0 0 0.08 0 0 0 0 0.06 0 0 0 0.08 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
 
-    /* === NOISE OVERLAY === */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-      opacity: 0.04;
-      pointer-events: none;
-      z-index: 9999;
-    }
+  a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+  a:hover { color: var(--accent-soft); }
 
-    /* === HERO === */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
-      padding: clamp(2rem, 8vw, 8rem) clamp(1.5rem, 10vw, 14rem);
-      position: relative;
-      overflow: hidden;
-    }
+  /* ───── HEADER / NAV ───── */
+  .masthead {
+    position: relative;
+    z-index: 10;
+    padding: 28px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(42, 31, 21, 0.15);
+    background: var(--bg);
+  }
+  .masthead .brand {
+    font-family: var(--serif-display);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 22px;
+    letter-spacing: 0.01em;
+    color: var(--ink);
+  }
+  .masthead .brand a { color: var(--ink); }
+  .masthead nav {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    display: flex;
+    gap: 32px;
+  }
+  .masthead nav a {
+    color: var(--ink-soft);
+    position: relative;
+    padding-bottom: 2px;
+  }
+  .masthead nav a:hover { color: var(--ink); }
+  .masthead nav a.current { color: var(--ink); border-bottom: 1px solid var(--ink); }
+  .masthead nav a.disabled { opacity: 0.4; pointer-events: none; }
 
-    .hero::after {
-      content: '';
-      position: absolute;
-      top: -20%;
-      right: -10%;
-      width: 55vw;
-      height: 55vw;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 70%);
-      pointer-events: none;
-    }
+  /* ───── HERO ───── */
+  .hero {
+    position: relative;
+    z-index: 5;
+    padding: 100px 48px 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .hero .kicker {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 36px;
+  }
+  .hero .kicker span { margin: 0 14px; opacity: 0.5; }
+  .hero h1 {
+    font-family: var(--serif-display);
+    font-weight: 500;
+    font-size: clamp(58px, 9vw, 132px);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 28px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+  }
+  .hero .subtitle {
+    font-family: var(--serif-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(20px, 2.4vw, 28px);
+    color: var(--ink-soft);
+    max-width: 720px;
+    margin: 0 auto 48px;
+    line-height: 1.4;
+  }
+  .hero .byline {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 64px;
+  }
+  .hero .byline strong { color: var(--ink); font-weight: 500; }
+  .hero .read-on {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  .hero .read-on:hover { color: var(--accent); }
+  .hero .read-on .line {
+    width: 1px;
+    height: 56px;
+    background: currentColor;
+    margin-top: 18px;
+    animation: drop 2.4s ease-in-out infinite;
+    transform-origin: top;
+  }
+  @keyframes drop {
+    0%, 100% { transform: scaleY(0.4); opacity: 0.4; }
+    50% { transform: scaleY(1); opacity: 1; }
+  }
 
-    .hero-label {
-      font-family: 'Josefin Sans', sans-serif;
-      font-weight: 200;
-      font-size: clamp(0.6rem, 1.2vw, 0.75rem);
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 2.5rem;
-      opacity: 0;
-      animation: fadeUp 1s ease 0.2s forwards;
-    }
+  /* ───── ESSAY BODY ───── */
+  article {
+    position: relative;
+    z-index: 5;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 40px 32px 120px;
+  }
 
-    .hero-title {
-      font-size: clamp(2.8rem, 8vw, 7rem);
-      font-weight: 300;
-      line-height: 1.05;
-      letter-spacing: -0.01em;
-      max-width: 14ch;
-      opacity: 0;
-      animation: fadeUp 1s ease 0.45s forwards;
-    }
+  .section-marker {
+    margin: 96px 0 48px;
+    text-align: center;
+  }
+  .section-marker .roman {
+    font-family: var(--serif-display);
+    font-style: italic;
+    font-size: 28px;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .section-marker .rule {
+    width: 80px;
+    height: 1px;
+    background: var(--rule);
+    margin: 0 auto;
+    opacity: 0.4;
+  }
 
-    .hero-title em {
-      font-style: italic;
-      color: var(--gold);
-    }
+  article h2 {
+    font-family: var(--serif-display);
+    font-weight: 500;
+    font-size: 38px;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin: 24px 0 32px;
+    text-align: center;
+  }
+  article h2 em { font-style: italic; color: var(--accent); }
 
-    .hero-subtitle {
-      font-family: 'Josefin Sans', sans-serif;
-      font-weight: 200;
-      font-size: clamp(0.75rem, 1.4vw, 0.9rem);
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-top: 2rem;
-      opacity: 0;
-      animation: fadeUp 1s ease 0.7s forwards;
-    }
+  article h3 {
+    font-family: var(--serif-display);
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 1.25;
+    color: var(--ink);
+    margin: 56px 0 20px;
+    letter-spacing: -0.005em;
+  }
+  article h3 .num {
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 500;
+    margin-right: 14px;
+  }
 
-    .scroll-hint {
-      position: absolute;
-      bottom: 3rem;
-      left: clamp(1.5rem, 10vw, 14rem);
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      font-family: 'Josefin Sans', sans-serif;
-      font-weight: 200;
-      font-size: 0.65rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--gold-dim);
-      opacity: 0;
-      animation: fadeUp 1s ease 1.2s forwards;
-    }
+  article p {
+    margin-bottom: 22px;
+    color: var(--ink);
+  }
 
-    .scroll-hint::before {
-      content: '';
-      display: block;
-      width: 40px;
-      height: 1px;
-      background: var(--gold-dim);
-    }
+  article p strong {
+    font-weight: 600;
+    color: var(--ink);
+  }
 
-    /* === DIVIDER === */
-    .rule {
-      width: clamp(60px, 12vw, 120px);
-      height: 1px;
-      background: linear-gradient(to right, var(--gold), transparent);
-      margin: 0 clamp(1.5rem, 10vw, 14rem);
-    }
+  article p em { font-style: italic; }
 
-    /* === ARTICLE BODY === */
-    .article {
-      padding: clamp(4rem, 10vw, 8rem) clamp(1.5rem, 10vw, 14rem);
-      max-width: 1400px;
-    }
+  /* Drop cap on the very first paragraph after the prologue heading */
+  article .drop-cap::first-letter {
+    font-family: var(--serif-display);
+    float: left;
+    font-size: 78px;
+    line-height: 0.85;
+    padding: 6px 12px 0 0;
+    font-weight: 500;
+    color: var(--accent);
+  }
 
-    .section {
-      margin-bottom: clamp(4rem, 8vw, 7rem);
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
+  /* Pull quote */
+  .pullquote {
+    font-family: var(--serif-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 1.4;
+    color: var(--accent);
+    border-left: 2px solid var(--accent);
+    padding: 8px 0 8px 28px;
+    margin: 40px 0;
+    letter-spacing: -0.005em;
+  }
 
-    .section.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  /* Coda divider */
+  .ornament {
+    text-align: center;
+    margin: 80px 0 60px;
+    font-family: var(--serif-display);
+    font-size: 28px;
+    color: var(--accent);
+    letter-spacing: 0.6em;
+    opacity: 0.7;
+  }
 
-    .section-number {
-      font-family: 'Josefin Sans', sans-serif;
-      font-weight: 200;
-      font-size: 0.6rem;
-      letter-spacing: 0.4em;
-      text-transform: uppercase;
-      color: var(--gold-dim);
-      margin-bottom: 1rem;
-    }
+  /* ───── FOOTER ───── */
+  footer {
+    position: relative;
+    z-index: 5;
+    border-top: 1px solid rgba(42, 31, 21, 0.15);
+    padding: 48px 48px 60px;
+    margin-top: 60px;
+    background: var(--bg-soft);
+  }
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 32px;
+  }
+  footer .meta {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+  footer .meta strong { color: var(--ink); font-weight: 500; }
+  footer .archive {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+  footer .archive .label {
+    color: var(--muted);
+    margin-bottom: 12px;
+    display: block;
+  }
+  footer .archive a {
+    display: block;
+    color: var(--ink);
+    margin-bottom: 8px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid transparent;
+  }
+  footer .archive a:hover { border-bottom-color: var(--accent); color: var(--accent); }
 
-    .section-heading {
-      font-size: clamp(1.5rem, 3.5vw, 2.8rem);
-      font-weight: 300;
-      font-style: italic;
-      line-height: 1.2;
-      color: var(--cream);
-      margin-bottom: 2rem;
-      padding-bottom: 1.5rem;
-      border-bottom: 1px solid rgba(201,168,76,0.2);
-    }
+  /* ───── RESPONSIVE ───── */
+  @media (max-width: 768px) {
+    body { font-size: 18px; }
+    .masthead { padding: 20px 24px; flex-direction: column; gap: 16px; }
+    .masthead nav { gap: 20px; font-size: 11px; }
+    .hero { padding: 60px 24px 60px; }
+    .hero h1 { font-size: 56px; }
+    article { padding: 20px 24px 80px; }
+    article h2 { font-size: 30px; }
+    article h3 { font-size: 22px; }
+    .pullquote { font-size: 22px; padding-left: 20px; }
+    .footer-inner { flex-direction: column; }
+  }
 
-    .section-body {
-      font-size: clamp(1rem, 1.5vw, 1.15rem);
-      line-height: 1.9;
-      color: rgba(245,240,232,0.75);
-      max-width: 72ch;
-    }
-
-    .section-body strong {
-      color: var(--gold);
-      font-weight: 400;
-    }
-
-    /* === PULL QUOTE === */
-    .pull-quote {
-      border-left: 2px solid var(--gold);
-      margin: 3rem 0;
-      padding: 1.5rem 2.5rem;
-      font-size: clamp(1.15rem, 2.2vw, 1.6rem);
-      font-style: italic;
-      line-height: 1.5;
-      color: var(--cream);
-      background: rgba(201,168,76,0.04);
-    }
-
-    /* === FOOTER === */
-    footer {
-      padding: 4rem clamp(1.5rem, 10vw, 14rem);
-      border-top: 1px solid rgba(255,255,255,0.06);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    footer .sig {
-      font-family: 'Josefin Sans', sans-serif;
-      font-weight: 200;
-      font-size: 0.7rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    footer .domain {
-      font-family: 'Josefin Sans', sans-serif;
-      font-weight: 200;
-      font-size: 0.7rem;
-      letter-spacing: 0.25em;
-      color: var(--gold-dim);
-    }
-
-    /* === ANIMATIONS === */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    /* === RESPONSIVE === */
-    @media (max-width: 600px) {
-      .pull-quote { padding: 1rem 1.5rem; }
-    }
-  </style>
+  /* Reveal animations */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s ease, transform 1s ease;
+  }
+  .reveal.in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
 </head>
 <body>
 
-  <!-- HERO -->
-  <header class="hero">
-    <p class="hero-label">A Philosophical Outlook &nbsp;/&nbsp; Opinion</p>
-    <h1 class="hero-title">The <em>Great</em> Decoupling</h1>
-    <p class="hero-subtitle">A Detailed Opinion Piece on the Future of Civilization</p>
-    <div class="scroll-hint">Read on</div>
-  </header>
+<header class="masthead">
+  <div class="brand"><a href="index.html">abrahamtonz</a></div>
+  <nav>
+    <a href="#" class="current">Vol. II</a>
+    <a href="vol-1.html">Vol. I</a>
+    <a href="about.html">About</a>
+  </nav>
+</header>
 
-  <div class="rule"></div>
+<section class="hero">
+  <div class="kicker">A Philosophical Outlook<span>·</span>Volume II<span>·</span>Opinion</div>
+  <h1>The <em>Great</em> Decoupling</h1>
+  <div class="subtitle">A flagship essay on the future of intelligence, labor, and the human project</div>
+  <div class="byline">By <strong>Tony Abraham</strong></div>
+  <a class="read-on" href="#essay">Read on<span class="line"></span></a>
+</section>
 
-  <!-- ARTICLE -->
-  <main class="article">
+<article id="essay">
 
-    <!-- Intro -->
-    <section class="section">
-      <p class="section-number">Preamble</p>
-      <h2 class="section-heading">Intelligence Unchained from Biology</h2>
-      <div class="section-body">
-        <p>We are not merely witnessing a technological trend; we are living through the <strong>Great Decoupling</strong>. Historically, human value has been tethered to human labor and cognitive output. For the first time, we are decoupling <strong>"intelligence"</strong> from <strong>"biology."</strong> This shift will permeate every facet of existence, from the mundane convenience of daily life to the fundamental structures of our biological mortality.</p>
-      </div>
-    </section>
+  <div class="section-marker"><div class="roman">Prologue</div><div class="rule"></div></div>
+  <h2>The Canary Is Still Alive</h2>
 
-    <!-- Section 1 -->
-    <section class="section">
-      <p class="section-number">I</p>
-      <h2 class="section-heading">The Transformation of Daily Convenience</h2>
-      <div class="section-body">
-        <p>In the immediate future, <strong>"convenience"</strong> will transition from automation to anticipation. Today, we ask an AI to book a flight; tomorrow, a personal agent—deeply integrated into our digital footprint—will have already re-routed our entire week because it anticipated a flight delay and a shift in our energy levels.</p>
+  <p class="drop-cap">In February of 2026, a macroeconomic research firm called Citrini published a thought exercise written in the voice of a future analyst, looking back from June 2028 on a crisis that had not yet happened. It described a world where the S&amp;P 500 had fallen 38% from its October 2026 highs, where unemployment had printed 10.2%, where prime mortgages underwritten to 780-FICO software engineers had quietly become the next subprime. The report's central image was what its authors called the <em>intelligence displacement spiral</em>: a feedback loop in which dollars a company saved by replacing a worker with an AI system flowed into the purchase of more AI capability, which enabled the next round of replacements, which funded the next round of capability, and so on.</p>
 
-        <div class="pull-quote">
-          "When an algorithm optimizes every meal, every route, and every social interaction for maximum satisfaction, we risk living in a velvet-lined prison of our own preferences."
-        </div>
+  <p>The markets took the piece seriously enough to sell off on the day it was published. Citadel Securities took it seriously enough to publish a rebuttal. The piece's authors were careful to call it a scenario, not a prediction. They ended with a line that has stayed with me: <em>The canary is still alive.</em></p>
 
-        <p>This <strong>Hyper-Personalization</strong> creates a world of frictionless existence. However, the price is a loss of serendipity. Society will need to intentionally re-introduce <strong>"planned randomness"</strong> to prevent the atrophy of the human spirit.</p>
-      </div>
-    </section>
+  <p>I am writing this essay because I think the scenario is worth taking seriously as one possibility among several, and because much of the public conversation about it tends to settle into camps that talk past each other. Some observers emphasize the staggering and underestimated upside. Others emphasize that transitions of this kind have historically broken things that took a long time to build. Both observations can be true at once, and the outcome is not predetermined. The future is not something we are about to receive; it is something being shaped right now, in a window that is measured in quarters, not decades.</p>
 
-    <!-- Section 2 -->
-    <section class="section">
-      <p class="section-number">II</p>
-      <h2 class="section-heading">The Healthcare Renaissance: From Reactive to Proactive</h2>
-      <div class="section-body">
-        <p>The most profound shift will be in the biological sciences. We are moving toward a world of <strong>Real-Time Biological Monitoring</strong>. Imagine a permanent, AI-driven diagnostic layer—perhaps a combination of wearable tech and internal nanosensors—that identifies a Stage 0 cancer cell and synthesizes a personalized mRNA treatment before you even feel a symptom.</p>
-        <p style="margin-top:1.5rem">Healthcare will evolve from <em>"treating the sick"</em> to <em>"optimizing the healthy."</em> This leads to the <strong>Longevity Escape Velocity</strong>, where we might extend life expectancy significantly. However, this creates a massive societal tension: <strong>Who gets access?</strong> We risk a <strong>"Biological Caste System"</strong> where the wealthy enjoy indefinite health while others remain bound by traditional mortality.</p>
-      </div>
-    </section>
+  <p>This is what I have come to call <strong>the Great Decoupling</strong> — the severing, for the first time in our species' history, of intelligence from biology. Many of the institutions we have built — from the mortgage market to the labor market — were designed for a world in which thinking was scarce and had to be housed inside a human skull. That assumption is now being tested, not in the abstract, but in the quarterly earnings reports of the companies whose business models depended on it.</p>
 
-    <!-- Section 3 -->
-    <section class="section">
-      <p class="section-number">III</p>
-      <h2 class="section-heading">Economic and Societal Advancement</h2>
-      <div class="section-body">
-        <p>The <strong>"Allocation Economy"</strong> will replace the <strong>"Knowledge Economy."</strong> If intelligence is free, the value of a person who merely <em>"knows things"</em> drops to zero. Value will instead reside in <strong>Intent and Taste.</strong> The human role will be to provide the teleology—the <em>"why."</em></p>
-        <p style="margin-top:1.5rem">We will see a resurgence in the <strong>"Human-to-Human" economy.</strong> As AI dominates white-collar tasks, we will place a premium on physical craft, artisanal goods, and high-empathy services—caregiving, coaching, philosophy.</p>
-      </div>
-    </section>
+  <p>What follows is an attempt to take the decoupling seriously — economically, institutionally, and intellectually — and then to sketch the choices that individuals, institutions, and societies will face. I am not writing as a technologist, and I am not writing as a doomer. I am writing as someone who has read carefully on multiple sides and come away thinking the disagreements are more interesting than the slogans.</p>
 
-    <!-- Section 4 -->
-    <section class="section">
-      <p class="section-number">IV</p>
-      <h2 class="section-heading">The Shadow of the Synthesis</h2>
-      <div class="section-body">
-        <p>The <em>"dystopia"</em> isn't necessarily a robot war; it is a <strong>Crisis of Meaning.</strong> If an AI can write a better symphony, paint a better masterpiece, and solve a better equation, what is left for us?</p>
+  <p>The range of plausible outcomes is wide. An economy of broad abundance is on the table; so is a much more uneven landing. The two outcomes are closer together in their starting conditions than is often realized, and further apart in where they land.</p>
 
-        <div class="pull-quote">
-          "We must treat life like a sport — we don't stop playing chess just because a computer is better; we play because the act of playing is what makes us human."
-        </div>
+  <div class="section-marker"><div class="roman">Part I</div><div class="rule"></div></div>
+  <h2>The Economic Spine</h2>
 
-        <p>Society must evolve to view <strong>"human effort"</strong> as an end in itself, rather than a means to an economic end. The question of the coming century is not whether machines will surpass us, but whether we will have the wisdom to remain whole in their shadow.</p>
-      </div>
-    </section>
+  <h3><span class="num">1.</span>The Intelligence Premium and Its Unwinding</h3>
 
-  </main>
+  <p>For the entire history of modern economies, human intelligence has been among the scarcest factors of production. Capital was abundant or at least replicable. Natural resources were finite but substitutable. Land could be developed, energy could be generated, labor could be trained. But the thing that <em>directed</em> all of those inputs — the capacity to analyze a situation, decide what to do, persuade another human to go along with it, and coordinate a group toward a shared goal — sat inside human brains and nowhere else.</p>
 
-  <footer>
-    <span class="sig">abrahamtonz.com &nbsp;·&nbsp; A Philosophical Opinion Piece</span>
-    <span class="domain">The Great Decoupling</span>
-  </footer>
+  <p>That scarcity produced what the Citrini authors call the <em>intelligence premium</em>: the structural wage differential that has accrued to cognitive work, and that has anchored the global middle class for roughly fifty years. A product manager at Salesforce made $180,000 a year not because her labor was physically difficult but because her judgment — her taste, her pattern-matching, her ability to translate a messy strategic question into a shippable roadmap — was genuinely rare and genuinely hard to replicate.</p>
 
-  <script>
-    // Intersection Observer for scroll reveals
-    const sections = document.querySelectorAll('.section');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.12 });
-    sections.forEach(s => observer.observe(s));
-  </script>
+  <p>We are now watching that premium come under pressure in real time. Not because AI has become conscious, or even particularly good at the deepest forms of human judgment, but because it has become good enough, cheap enough, and fast enough at a surprising number of tasks that used to require a mid-career professional to do well. And once that threshold is crossed for a given task, the economics tend not to revert. A company that has figured out how to replace a $180,000 salary with a $200-a-month API call does not un-figure it out when the next quarter begins.</p>
+
+  <div class="pullquote">"The new jobs that might otherwise have absorbed the displaced are themselves candidates for displacement, often by the same systems that displaced the original worker."</div>
+
+  <p>The critical observation — and this is where many optimistic framings get tested — is that the mechanism may be self-reinforcing rather than self-correcting. In every prior wave of automation, displaced workers eventually moved into new categories of work that the technology itself had created. Bank tellers became loan officers. Travel agents became experience designers. The horse gave way to the truck driver, who is now giving way, more slowly than predicted but inevitably, to the autonomous vehicle. The pattern held for two centuries, and it produced the conviction — common among economists, policymakers, and educated laypeople — that <em>technology creates more jobs than it destroys in the long run.</em></p>
+
+  <p>What may be different this time is that the technology is a general-purpose cognitive substitute. The Salesforce product manager who loses her job to a coding agent cannot simply reskill into "AI management," because the AI is already doing that coordination work. She can move down the wage ladder into services and gig work — and many will, and many have — but the ladder itself may be shortening, because autonomous vehicles and embodied robotics are coming for those rungs too, on a slightly longer lag.</p>
+
+  <p>It is not enough to say <em>new jobs will emerge</em>; you have to specify which jobs, at what wages, for how many people, on what timeline. When you try to do that arithmetic honestly, the picture starts to look more like a structural repricing of human labor than a cyclical reallocation of it — though reasonable people read the same data and come to different conclusions, and they may yet be proven right.</p>
+
+  <h3><span class="num">2.</span>The Mechanism: How Friction Goes to Zero</h3>
+
+  <p>To see why the repricing might compound rather than dissipate, it helps to think about what white-collar work actually <em>is</em> at the level of the dollar. A large fraction of the modern service economy is not production of new value but <em>intermediation</em> — the extraction of a small rent from the friction that exists between a person who wants something and the thing they want.</p>
+
+  <p>A travel agent sits between you and a flight. A financial advisor sits between you and a diversified portfolio. A real estate agent sits between you and a house. A mortgage broker sits between you and a loan. A SaaS vendor sits between your company and a workflow you could, in principle, build yourself. In each case, the intermediary's margin is a function of how hard it would be for you to navigate the complexity on your own, multiplied by how much you value your time. The layer of fees is the layer of friction, monetized.</p>
+
+  <div class="pullquote">"Agentic AI drives the marginal cost of navigating complexity toward zero. Not in every domain at once, and not perfectly, but persistently and asymmetrically."</div>
+
+  <p>An AI agent does not get tired of price-matching across twelve platforms. It does not settle for the first acceptable hotel because it is eleven o'clock at night. It does not forget to cancel the subscription before the trial ends. It does not feel the pull of a well-designed checkout flow. The entire tradition of consumer manipulation — dark patterns, loyalty programs, introductory pricing, cognitive load as a moat — was built to exploit the limits of a tired, distracted, loss-averse human. The moment a substantial fraction of purchasing decisions route through software that does not have those limits, a very large number of business models stop working as they used to.</p>
+
+  <p>This is not a prediction about 2035. It is already visible in the first-order data. Travel platforms are seeing their booking share eroded by agent-assisted itineraries. Insurance renewals, which depend on customer inertia, are being re-shopped annually. Real estate commissions in major metros are compressing from 2.5–3% toward 1% as buy-side agents become technically less necessary. The long tail of SaaS — project management tools, scheduling utilities, simple CRMs — is losing renewals to in-house builds spun up in a weekend by a single developer with a coding agent. The question is not whether the intermediation layer gets repriced. The question is how far, and how fast.</p>
+
+  <p>The recursion is that the companies most threatened by this dynamic find it difficult to resist it. Historically, incumbents lost to new technology by moving too slowly — Kodak refused to cannibalize its film business, Blockbuster refused to go digital. But a company facing a coding-agent-driven margin compression has a hard time choosing to wait. Its choices are to adopt the technology aggressively, cutting its own headcount to fund more AI capability, or to watch a better-capitalized competitor do the same. Each CEO's locally rational decision becomes a contributor to the broader dynamic. This is the first engine of the intelligence displacement spiral, and it is already running.</p>
+
+  <h3><span class="num">3.</span>The Ghost GDP Problem</h3>
+
+  <p>The second engine is subtler. Call it the <em>Ghost GDP</em> problem, a term Citrini borrows from the fictional pundits in its scenario.</p>
+
+  <p>Productivity, in the aggregate, is going up. Output per hour is rising at rates the U.S. has not seen since the postwar boom. Corporate margins are expanding. On paper, the economy looks healthier than it has in a generation. But the gains may not be flowing through the traditional circuit.</p>
+
+  <p>The standard macroeconomic picture is a loop: firms pay workers, workers spend their income on goods and services produced by other firms, those firms pay their own workers, and government takes a cut at every step to fund transfers and public goods. The apparatus of modern taxation is, at bottom, a tax on human time being compensated. Income tax, payroll tax, sales tax at the point of consumption — much of it assumes that value flows through households on its way back to firms.</p>
+
+  <p>What happens when value is produced by a GPU cluster in North Dakota instead of by ten thousand knowledge workers in Manhattan? The output shows up in the national accounts. It does not show up in payrolls. It does not show up in household consumption. It does not show up, most critically, in the federal tax base in the same way. A relatively small number of shareholders and infrastructure providers capture a significant share of the gains. The circular flow strains — not necessarily catastrophically, but in a direction modern economies have not had to manage before.</p>
+
+  <p>This is what the consumption hit can look like when you run the arithmetic. The top 10% of U.S. earners account for more than half of all consumer spending; the top 20% account for roughly two-thirds. These are disproportionately the same workers — senior professionals, managers, mid-career specialists — whose jobs are most exposed to agentic AI. A 2% decline in white-collar employment does not produce a 2% decline in consumption. It tends to produce something more like a 3–4% decline, because the people losing their jobs were buying the houses, the cars, the vacations, the private school tuitions that sit at the top of the consumer pyramid.</p>
+
+  <p>The feedback loop closes when you notice that the businesses selling those big-ticket discretionary goods are themselves white-collar-intensive, and tend to respond to a demand shortfall the way public companies usually do: by cutting costs, which in practice means cutting headcount, which in practice means buying more AI. The spiral does not require any villain, any bubble, any panic. It requires only a large number of self-interested actors making locally rational decisions inside an economy whose aggregate structure is shaped by their collective behavior.</p>
+
+  <div class="section-marker"><div class="roman">Part II</div><div class="rule"></div></div>
+  <h2>Living Through the Transition</h2>
+
+  <h3><span class="num">11.</span>The Individual Blueprint</h3>
+
+  <p>Whatever the macroeconomic picture turns out to be, individual lives will be lived inside it, and there are concrete moves available at the individual level that compose well across a wide range of futures.</p>
+
+  <p><strong>Cultivate judgment, not inventory.</strong> The skill that is being repriced fastest is the ability to retrieve, format, and apply known information. The skill that is being repriced slowest is the ability to decide what is worth doing in the first place — to recognize a problem worth solving, to assemble the messy combination of taste, context, and consequence that turns information into a decision. AI systems, at least for now, are excellent at the former and weaker at the latter. The professionals who will compose well with these tools over the next decade are the ones whose work product is shaped, at its core, by judgment that is hard to specify in advance.</p>
+
+  <p><strong>Build composability with AI tools as a default skill.</strong> The differential between a knowledge worker who is fluent with agentic tools and one who is not is already large and is widening fast. This is not about prompt engineering as a discrete skill; it is about developing an intuitive sense of what these systems are good at, what they are bad at, where they fail in subtle ways, and how to structure your own work so that you and they are doing what each is best at.</p>
+
+  <p><strong>Invest in deep relationships and physical presence.</strong> The categories of work that look most durable across plausible futures are the ones with high relational and physical components — the trades, hands-on care work, in-person leadership, certain kinds of creative direction, the parts of medicine and law and teaching that are about being with another human in a room. Some of this is wage protection; more of it is meaning protection. The people who come through this period most intact will, on average, be the ones who built dense networks of real relationships and developed at least one form of competent physical work, because those things both anchor income and anchor identity in a period when both are likely to be volatile.</p>
+
+  <p><strong>Keep your financial life legible and your debt levels conservative.</strong> The distribution of economic outcomes in a Citrini-style scenario is wide, and tail risks are real. A household that enters the next five years with low fixed obligations, visibility into its own cash flows, and a reasonable cushion is a household that has preserved optionality. A household that has levered itself to the income trajectory of a profession that is being actively disrupted is a household that has taken a correlated bet it may not realize it has taken. The repricing Citrini describes does not require a crisis to hurt you; it only requires a mediocre decade for a category of worker you happen to belong to. Give yourself room.</p>
+
+  <h3><span class="num">12.</span>The Institutional Layer</h3>
+
+  <p>Individual adaptation is necessary but not sufficient. Many of the harder outcomes — the macroeconomic feedback loops, the credit market exposures, the pace of professional displacement — happen at scales no individual can respond to. Institutions face their own version of the question.</p>
+
+  <p><strong>Companies are deciding what they are optimizing for.</strong> Two strategic frames exist for how a firm uses agentic AI. One frame treats the technology as cost substitution: cut headcount to expand margin, redeploy savings into more capability, repeat. The other frame treats it as capacity expansion: use the new tools to do more, at higher quality, for more customers, rather than the same with fewer people. Both frames are coherent. They produce different effects on workforce composition, on franchise durability, and on aggregate consumer purchasing power. Which frame a given board chooses is, in practice, one of the most consequential strategic questions of the moment, and reasonable executives are arriving at different answers.</p>
+
+  <p><strong>Educational institutions face a hard pivot.</strong> The modern university is, at the level of its business model, a credentialing system for a labor market that may be going through structural repricing. If the primary value proposition of a graduate is an inventory of domain knowledge, that proposition is exposed to the same forces affecting other knowledge work. Some institutions are responding with surface-level adjustments — AI fluency modules bolted onto existing curricula. Others are asking whether something deeper is required: a shift toward judgment cultivation, the development of taste, and apprenticeship in decision-making under real consequence.</p>
+
+  <p><strong>Financial regulators face a question about correlated exposure.</strong> One of the more underexamined questions is the degree to which the private credit system, the insurance balance sheets that back parts of it, and the mortgage paper that assumes continued professional wage growth are all, at their deepest layer, exposed to the same underlying assumption about the intelligence premium. Whether this rises to a 2008-style risk or a slower revaluation is contested. What is less contested is that the analysis itself is worth doing carefully, in advance.</p>
+
+  <p><strong>Healthcare systems were configured for scarcity.</strong> The healthcare apparatus in the developed world was built around scarce clinician time, scarce drug supply, scarce diagnostic capacity. Several of those operational assumptions are being challenged by systems that make various kinds of medical cognition more abundant. Hospital systems, payers, and medical schools are working through what triage, validation, and follow-up look like in a world where the bottleneck is shifting from "can we identify this pathology" to "how do we act humanely on the flood of early-stage findings that continuous monitoring produces."</p>
+
+  <p><strong>Governments face the question of transition design.</strong> Across developed economies, a debate is underway — sometimes openly, sometimes implicitly — about what, if anything, the public sector should do in response to professional displacement. Each option carries trade-offs that thoughtful people weigh differently. What seems clear is that the choice itself is being made, even when it is being made by default; <em>not</em> designing a transition framework is itself a policy decision, with its own consequences.</p>
+
+  <h3><span class="num">13.</span>The Civilizational Layer</h3>
+
+  <p>At the largest scale, the question is what the underlying frameworks of modern life look like on the other side of a transition of this kind. This is the register in which it is hardest to be confident, because we are talking about second-order effects on institutions and norms whose first-order behavior is itself in flux.</p>
+
+  <p>Several questions are worth holding open rather than closed. What is the working definition of human dignity in an economy where productivity is no longer the binding constraint on it? How do public institutions move at the speed of the technology? How do existing political and economic frameworks adapt under sustained technological pressure?</p>
+
+  <div class="pullquote">"Frameworks face real adaptive pressure, and the quality of the institutional response — across companies, governments, and civil society — is likely to vary considerably from place to place."</div>
+
+  <p>I am not arguing that any existing framework is obsolete. I am noting that frameworks face real adaptive pressure, and that the quality of the institutional response is likely to vary considerably from place to place. The communities that handle this thoughtfully will set patterns; the ones that do not will face harder versions of the same questions later.</p>
+
+  <h3><span class="num">14.</span>A Word to the Next Generation</h3>
+
+  <p>I want to close the practical part of this essay with something more personal, because a piece like this one is incomplete without an answer to the question: <em>what do I tell the kids?</em></p>
+
+  <p><strong>To the middle schooler</strong> reading this now, or having parents who read it: the next twenty years will probably not look like the twenty years before them. The standard advice — go to a good school, pick a stable profession, climb a ladder — was advice for a world where the ladder was reliably there. You may have to build your own ladders, and many of them will turn out to lead to nothing, and the skill is not in picking the right one but in building several of them and letting the good ones compound. Learn to focus. Learn to be bored without reaching for your phone. Learn to love a problem for its own sake. Learn to make things with your hands. Learn to take care of the people around you. And learn, above all, to tell the difference between what you want and what the systems around you want you to want.</p>
+
+  <p><strong>To the college student:</strong> the career advice you are getting is going to age unevenly. Pick a problem domain you genuinely care about and go deep on it, using every tool available. Build a public record of judgment in that domain — projects, products, papers, interventions — that a future collaborator can look at and know what you are like to work with. Be cautious of the prestige trap; the prestige economy is being repriced along with everything else. Your moat is not your credential; your moat is the density of your decisions and the quality of your relationships. Build both, deliberately, starting now.</p>
+
+  <p><strong>To the mid-career professional</strong> staring down a disrupted industry: you are not doomed, but you are in a race. The specific thing you know how to do is probably getting cheaper by the month, and the adjacent thing that is not being repriced is not going to wait for you indefinitely. The move is to identify, honestly, what of your existing expertise composes well with AI tooling and what does not, and to redeploy your energy toward the former at a pace that is faster than you are currently moving. The second move is to take your savings rate and your household leverage seriously, because income volatility is likely to be higher than it has been, and the people who come through this best will be the ones who bought themselves time to adapt.</p>
+
+  <div class="ornament">· · ·</div>
+
+  <div class="section-marker"><div class="roman">Coda</div><div class="rule"></div></div>
+  <h2>The Canary Revisited</h2>
+
+  <p>I began this essay with Citrini's image of the canary, still alive in February of 2026, in a scenario looking back from 2028 at a crisis that had not yet happened. I want to close with it.</p>
+
+  <p>The canary is a warning, but it is also an opportunity. The authors of the scenario were explicit that they were not predicting the future. They were modeling a plausible tail case, and they were doing it in February 2026 specifically because the feedback loops they were describing had not yet begun in earnest. The whole point of the exercise was to compress the intuition for what could happen into a form that could still be acted on, while there was time.</p>
+
+  <p>We are reading this now — you and I, in 2026 — with most of the degrees of freedom still available to us. The equities markets have not yet had the move the scenario describes. The mortgage market has not yet cracked. The intelligence premium has been narrowing, but the floor has not yet been tested. We are standing in the window the Citrini authors specifically wrote their scenario to illuminate, and the question is what we do with it.</p>
+
+  <p>My answer is some version of: <em>attention, at every scale that is available to us.</em> The individual work of focus, judgment, and relationship. The institutional work of reorienting companies, schools, and other organizations for an era they were not originally designed for. The broader work of thinking carefully about what human flourishing looks like when productivity is no longer the binding constraint on it. None of these is sufficient alone. All of them are likely to be relevant.</p>
+
+  <p>I do not know how any of this will play out. The historical base rate for large pluralistic societies voluntarily reorganizing themselves in advance of a visible crisis is not high. But I have come to believe, increasingly, that the outcomes in 2035 will be much more variable across countries, across companies, and across individual lives than the general discourse acknowledges. Some places will get this right. Some people will get this right. The difference between the ones who do and the ones who do not will not be luck, or starting position, or even intelligence in the usual sense. It will be something closer to <em>seriousness</em> — the willingness to look at the decoupling directly, without romanticizing either the upside or the downside, and to act on what you see.</p>
+
+  <p>Intelligence is being decoupled from biology. The consequences of that decoupling are likely to be among the dominant facts of the next century. We have been handed something genuinely new, and the question of what to do with it is going to be answered by many actors at once, working at different scales, with different time horizons, and different stakes.</p>
+
+  <div class="pullquote">"The canary is still alive. Let us not waste the warning."</div>
+
+</article>
+
+<footer>
+  <div class="footer-inner">
+    <div class="meta">
+      <strong>abrahamtonz.com</strong><br />
+      A Philosophical Opinion Piece<br />
+      The Great Decoupling, Vol. II
+    </div>
+    <div class="archive">
+      <span class="label">Archive</span>
+      <a href="#" class="current">Vol. II — The Great Decoupling (2026)</a>
+      <a href="vol-1.html">Vol. I — Intelligence Unchained from Biology</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Subtle reveal-on-scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.section-marker, .pullquote').forEach(el => {
+    el.classList.add('reveal');
+    observer.observe(el);
+  });
+</script>
 
 </body>
 </html>

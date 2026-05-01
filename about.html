@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>About — abrahamtonz</title>
+<meta name="description" content="About this opinion portal and Tony Abraham, technology entrepreneur and writer." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f1e8;
+    --bg-soft: #ebe5d4;
+    --ink: #1a1410;
+    --ink-soft: #4a3f33;
+    --rule: #2a1f15;
+    --accent: #7a2f1d;
+    --accent-soft: #a64a32;
+    --muted: #6b5d4d;
+    --serif-display: "Cormorant Garamond", "EB Garamond", Georgia, serif;
+    --serif-body: "EB Garamond", Georgia, "Times New Roman", serif;
+    --sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family: var(--serif-body); font-size: 19px; line-height: 1.7;
+    -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: ""; position: fixed; inset: 0; pointer-events: none;
+    opacity: 0.35; z-index: 1;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.1 0 0 0 0 0.08 0 0 0 0 0.06 0 0 0 0.08 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+  a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+  a:hover { color: var(--accent-soft); }
+
+  .masthead {
+    position: relative; z-index: 10; padding: 28px 48px;
+    display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 1px solid rgba(42, 31, 21, 0.15); background: var(--bg);
+  }
+  .masthead .brand {
+    font-family: var(--serif-display); font-style: italic; font-weight: 500;
+    font-size: 22px; letter-spacing: 0.01em; color: var(--ink);
+  }
+  .masthead .brand a { color: var(--ink); }
+  .masthead nav {
+    font-family: var(--sans); font-size: 12px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    display: flex; gap: 32px;
+  }
+  .masthead nav a { color: var(--ink-soft); padding-bottom: 2px; }
+  .masthead nav a:hover { color: var(--ink); }
+  .masthead nav a.current { color: var(--ink); border-bottom: 1px solid var(--ink); }
+
+  .hero {
+    position: relative; z-index: 5; padding: 100px 48px 60px;
+    max-width: 1200px; margin: 0 auto; text-align: center;
+  }
+  .hero .kicker {
+    font-family: var(--sans); font-size: 11px;
+    letter-spacing: 0.32em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 36px;
+  }
+  .hero .kicker span { margin: 0 14px; opacity: 0.5; }
+  .hero h1 {
+    font-family: var(--serif-display); font-weight: 500;
+    font-size: clamp(52px, 8vw, 108px); line-height: 0.95;
+    letter-spacing: -0.02em; color: var(--ink); margin-bottom: 28px;
+  }
+  .hero h1 em { font-style: italic; font-weight: 400; color: var(--accent); }
+  .hero .subtitle {
+    font-family: var(--serif-display); font-style: italic;
+    font-weight: 400; font-size: clamp(20px, 2.4vw, 26px);
+    color: var(--ink-soft); max-width: 720px; margin: 0 auto 0;
+    line-height: 1.4;
+  }
+
+  article {
+    position: relative; z-index: 5; max-width: 720px;
+    margin: 0 auto; padding: 40px 32px 100px;
+  }
+  .section-marker { margin: 80px 0 40px; text-align: center; }
+  .section-marker:first-child { margin-top: 40px; }
+  .section-marker .roman {
+    font-family: var(--serif-display); font-style: italic;
+    font-size: 26px; color: var(--accent); margin-bottom: 8px;
+  }
+  .section-marker .rule {
+    width: 80px; height: 1px; background: var(--rule);
+    margin: 0 auto; opacity: 0.4;
+  }
+  article h2 {
+    font-family: var(--serif-display); font-weight: 500;
+    font-size: 36px; line-height: 1.15; letter-spacing: -0.01em;
+    color: var(--ink); margin: 24px 0 32px; text-align: center;
+  }
+  article h2 em { font-style: italic; color: var(--accent); }
+  article p { margin-bottom: 22px; color: var(--ink); }
+  article p strong { font-weight: 600; color: var(--ink); }
+  article p em { font-style: italic; }
+
+  .pullquote {
+    font-family: var(--serif-display); font-style: italic;
+    font-weight: 400; font-size: 24px; line-height: 1.45;
+    color: var(--accent); border-left: 2px solid var(--accent);
+    padding: 8px 0 8px 28px; margin: 36px 0; letter-spacing: -0.005em;
+  }
+
+  /* Disclaimer card */
+  .disclaimer {
+    background: var(--bg-soft);
+    border: 1px solid rgba(42, 31, 21, 0.12);
+    padding: 32px 36px;
+    margin: 36px 0;
+    position: relative;
+  }
+  .disclaimer::before {
+    content: "A NOTE TO THE READER";
+    position: absolute;
+    top: -10px;
+    left: 24px;
+    background: var(--bg);
+    padding: 0 12px;
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--muted);
+  }
+  .disclaimer p {
+    font-size: 17px;
+    color: var(--ink-soft);
+    margin-bottom: 14px;
+  }
+  .disclaimer p:last-child { margin-bottom: 0; }
+
+  /* Bio facts list */
+  .facts {
+    margin: 32px 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid rgba(42, 31, 21, 0.15);
+  }
+  .facts li {
+    display: flex;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(42, 31, 21, 0.15);
+    align-items: baseline;
+    gap: 24px;
+  }
+  .facts .label {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    flex-shrink: 0;
+    width: 130px;
+  }
+  .facts .value {
+    font-family: var(--serif-body);
+    font-size: 18px;
+    color: var(--ink);
+  }
+  .facts .value em { font-style: italic; color: var(--ink-soft); }
+
+  .ornament {
+    text-align: center; margin: 60px 0 40px;
+    font-family: var(--serif-display); font-size: 28px;
+    color: var(--accent); letter-spacing: 0.6em; opacity: 0.7;
+  }
+
+  /* CTA strip back to essays */
+  .cta-strip {
+    margin: 48px 0 0;
+    padding: 32px 0;
+    border-top: 1px solid rgba(42, 31, 21, 0.2);
+    border-bottom: 1px solid rgba(42, 31, 21, 0.2);
+    text-align: center;
+  }
+  .cta-strip .label {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 14px;
+  }
+  .cta-strip .links {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .cta-strip a {
+    font-family: var(--serif-display);
+    font-style: italic;
+    font-size: 22px;
+    color: var(--ink);
+    border-bottom: 1px solid transparent;
+    padding-bottom: 2px;
+  }
+  .cta-strip a:hover {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+
+  footer {
+    position: relative; z-index: 5;
+    border-top: 1px solid rgba(42, 31, 21, 0.15);
+    padding: 48px 48px 60px; margin-top: 60px; background: var(--bg-soft);
+  }
+  .footer-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; justify-content: space-between; align-items: flex-start;
+    flex-wrap: wrap; gap: 32px;
+  }
+  footer .meta {
+    font-family: var(--sans); font-size: 12px;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--muted); line-height: 1.8;
+  }
+  footer .meta strong { color: var(--ink); font-weight: 500; }
+  footer .archive {
+    font-family: var(--sans); font-size: 11px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+  }
+  footer .archive .label { color: var(--muted); margin-bottom: 12px; display: block; }
+  footer .archive a {
+    display: block; color: var(--ink); margin-bottom: 8px;
+    padding-bottom: 6px; border-bottom: 1px solid transparent;
+  }
+  footer .archive a:hover { border-bottom-color: var(--accent); color: var(--accent); }
+
+  @media (max-width: 768px) {
+    body { font-size: 18px; }
+    .masthead { padding: 20px 24px; flex-direction: column; gap: 16px; }
+    .masthead nav { gap: 20px; font-size: 11px; }
+    .hero { padding: 60px 24px 40px; }
+    .hero h1 { font-size: 52px; }
+    article { padding: 20px 24px 60px; }
+    article h2 { font-size: 28px; }
+    .disclaimer { padding: 28px 22px; }
+    .disclaimer::before { left: 16px; font-size: 9px; }
+    .facts li { flex-direction: column; gap: 4px; }
+    .facts .label { width: auto; }
+    .pullquote { font-size: 20px; padding-left: 20px; }
+    .cta-strip a { font-size: 19px; }
+    .footer-inner { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="brand"><a href="index.html">abrahamtonz</a></div>
+  <nav>
+    <a href="index.html">Vol. II</a>
+    <a href="vol-1.html">Vol. I</a>
+    <a href="#" class="current">About</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="kicker">About<span>·</span>The Portal &amp; The Writer</div>
+  <h1>A <em>thinking</em> place</h1>
+  <div class="subtitle">Personal essays on technology, intelligence, and what comes next — written in the open, revised in public, offered without pretense of authority.</div>
+</section>
+
+<article>
+
+  <div class="section-marker"><div class="roman">I</div><div class="rule"></div></div>
+  <h2>What This Is</h2>
+
+  <p>This site is a personal essay portal. Each volume is a long-form opinion piece on a question the author has been turning over — most often something at the intersection of technology, work, and meaning. The pieces are published one at a time, and the most recent one always lives at the front door. Earlier volumes move into the archive.</p>
+
+  <p>The writing here is meant to be read the way you might read a long letter from a friend who has been thinking about something for a while: with patience, with skepticism, and with the understanding that thinking out loud is different from issuing pronouncements.</p>
+
+  <div class="disclaimer">
+    <p><strong>This is opinion, not statement.</strong> Everything published here represents one person's point of view at one point in time. None of it should be read as established fact, professional advice, or institutional position. Where the essays cite numbers, scenarios, or specific events, those references are illustrative — the underlying claim is always an interpretation, never a measurement.</p>
+
+    <p><strong>Much of what follows is forward-looking and speculative.</strong> The essays often describe possible futures, plausible feedback loops, and trajectories that have not yet played out. These are exercises in pattern recognition, not predictions. The author has been wrong before and will be wrong again. The point is to think clearly about what <em>could</em> happen so that we are less surprised when something does, not to claim privileged knowledge of what <em>will</em>.</p>
+
+    <p><strong>Reasonable people will disagree.</strong> The questions explored here — about labor, intelligence, institutions, and meaning — are genuinely contested, and thoughtful observers come to different conclusions from the same evidence. The essays present one reading. Other readings are available, often persuasive, and worth seeking out.</p>
+
+    <p><strong>Nothing here is financial, legal, medical, or professional advice.</strong> If a passage touches on markets, careers, health, or policy, it is doing so at the level of ideas — not recommendations. Decisions that affect your life deserve sources better suited to your specific situation than an essay on the open internet.</p>
+
+    <p><strong>The work is unfinished.</strong> Essays may be revised after publication when the author's thinking changes or a reader points out something that wasn't right. This is a feature, not a bug. The goal is to think well, not to be right the first time.</p>
+  </div>
+
+  <p>Read with all of that in mind, and the writing is offered in the spirit it was written: as one attempt to take a hard question seriously, in public, without pretending to have the final word.</p>
+
+  <div class="section-marker"><div class="roman">II</div><div class="rule"></div></div>
+  <h2>About the Writer</h2>
+
+  <p><strong>Tony Abraham</strong> is a technology entrepreneur and writer based in New York. He has spent more than fifteen years building, operating, and advising in the technology industry — across early-stage startups, growth-stage companies, and the parts of larger organizations where new products get made. His current focus is on artificial intelligence and machine learning, and on the broader question of how this generation of technology reshapes work, institutions, and the texture of everyday life.</p>
+
+  <p>He writes essays here because the conversation about AI tends to run hot at both ends — breathless on one side, fatalist on the other — and because he thinks the more interesting territory sits in the middle, where the trade-offs are real and the answers are not yet obvious. The pieces are deliberately personal in voice and ambitious in scope. They are an attempt to think on the page about questions that are too large for a tweet and too live for a textbook.</p>
+
+  <p>Outside of writing, he works with founders and operators on the practical side of the same questions — how teams should be structured when the underlying tools are changing every quarter, how products should be designed for users who increasingly bring their own AI to the interaction, how organizations adapt without losing what made them work in the first place. He considers himself, by temperament, more of a builder than a commentator. The essays are what happens when the builder side of him notices a pattern that does not yet have a good name.</p>
+
+  <ul class="facts">
+    <li><span class="label">Based</span><span class="value">New York City</span></li>
+    <li><span class="label">Industry</span><span class="value">Technology — 15+ years</span></li>
+    <li><span class="label">Current focus</span><span class="value">AI &amp; ML; the future of work</span></li>
+    <li><span class="label">Background</span><span class="value">Entrepreneur, operator, advisor</span></li>
+    <li><span class="label">Disposition</span><span class="value"><em>Builder first, writer second</em></span></li>
+  </ul>
+
+  <div class="pullquote">"The point is to think clearly about what could happen so that we are less surprised when something does."</div>
+
+  <p>Beyond the work, Tony is a reader, a long-walker, and a New Yorker in the way that requires no further explanation if you have ever been one. He believes that the most valuable thing a person can offer in a noisy decade is a serious attempt to make sense of it, and that the act of writing — slowly, carefully, in full sentences — is one of the few remaining defenses against thinking in slogans. This site is his contribution.</p>
+
+  <div class="ornament">· · ·</div>
+
+  <div class="cta-strip">
+    <div class="label">Read the essays</div>
+    <div class="links">
+      <a href="index.html">Vol. II — The Great Decoupling</a>
+      <a href="vol-1.html">Vol. I — Intelligence Unchained from Biology</a>
+    </div>
+  </div>
+
+</article>
+
+<footer>
+  <div class="footer-inner">
+    <div class="meta">
+      <strong>abrahamtonz.com</strong><br />
+      A Philosophical Opinion Portal<br />
+      Written by Tony Abraham
+    </div>
+    <div class="archive">
+      <span class="label">Archive</span>
+      <a href="index.html">Vol. II — The Great Decoupling (2026)</a>
+      <a href="vol-1.html">Vol. I — Intelligence Unchained from Biology</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
